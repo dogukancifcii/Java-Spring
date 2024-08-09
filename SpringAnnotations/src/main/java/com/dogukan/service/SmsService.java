@@ -2,8 +2,14 @@ package com.dogukan.service;
 
 import com.dogukan.domain.Message;
 import com.dogukan.repository.DbRepository;
+import com.dogukan.repository.Repository;
 
 public class SmsService implements MsgService {
+    private Repository repository; //hangi repo belli degil
+
+    public SmsService(Repository repository){//cons ile repository hangi repoya baglanicak onu seciyoruz
+        this.repository=repository;
+    }
 
     @Override
     public void sendMessage(Message message) {
@@ -12,7 +18,6 @@ public class SmsService implements MsgService {
 
     @Override
     public void saveMessage(Message message) {
-        DbRepository repository = new DbRepository();
         repository.saveMessage(message);
     }
 }

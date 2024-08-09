@@ -1,6 +1,8 @@
 package com.dogukan.controller;
 
 import com.dogukan.domain.Message;
+import com.dogukan.repository.FileRepository;
+import com.dogukan.repository.Repository;
 import com.dogukan.service.MailService;
 import com.dogukan.service.MsgService;
 import com.dogukan.service.SmsService;
@@ -10,7 +12,8 @@ public class MessageApplication {
     public static void main(String[] args) {
         Message message = new Message();
         message.setBody("Spring is COMING...");
-        MsgService service = new MailService();
+        Repository repository = new FileRepository();
+        MsgService service = new MailService(repository);
 
         //olusturdugumuz mesaji mail ile gondermek istersem!!!
         //MailService mailService = new MailService();//guncellemek icin burayi sildim
@@ -28,8 +31,12 @@ public class MessageApplication {
         service.sendMessage(message);//ne ile new'lersem ona gore degisiklik olur!!!
 
         //bu mesajlari db'ye kaydetmek istiyorum
+        //service.saveMessage(message);
+
+        //ben bu mesaji db'e degilde bir dosyanin icerisine(file) kaydetmek istersem
+        //service.saveMessage(message);
+
+        //-------------------------------
         service.saveMessage(message);
-
-
     }
 }
