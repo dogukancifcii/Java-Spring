@@ -10,7 +10,7 @@ public class MessageApplication {
     public static void main(String[] args) {
         Message message = new Message();
         message.setBody("Spring is COMING...");
-        MsgService service = new WhatsappService();
+        MsgService service = new MailService();
 
         //olusturdugumuz mesaji mail ile gondermek istersem!!!
         //MailService mailService = new MailService();//guncellemek icin burayi sildim
@@ -26,5 +26,10 @@ public class MessageApplication {
 
         //------------------------------------------------------
         service.sendMessage(message);//ne ile new'lersem ona gore degisiklik olur!!!
+
+        //bu mesajlari db'ye kaydetmek istiyorum
+        service.saveMessage(message);
+
+
     }
 }
