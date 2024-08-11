@@ -35,7 +35,9 @@ public class MessageApplicationSpring {
         //yani biz constructor olusturmadan spring kendisi enjeckte edip olusturdu.
 
         //eger FileRepository Classinada component eklenip springin yapmasini istersek isimlendirme yapmaliyiz. Yoksa 2 componentten birini secemiyor spring.Yani assagidaki gibi yapmaliyiz:
-        
+        // @Qualifier("fileRepository") //buradan fileRepositorye kaydet demis olduk.InstaService icine yazdik.
+
+
 
     }
 }
