@@ -6,6 +6,8 @@ import com.dogukan.service.MsgService;
 import com.dogukan.service.SlackService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.Random;
+
 public class MessageApplicationSpring {
     public static void main(String[] args) {
         Message message = new Message();
@@ -30,14 +32,20 @@ public class MessageApplicationSpring {
 
 
         //bagimlilik varsa ne olur? //repositorye baglandigi icin bagimlilik var.
-        MsgService service = context.getBean("insta_service", MsgService.class); //insta_service'i newlemedik
-        service.saveMessage(message); //service repoya bagimli ama biz enjekte etmedik.
+        //MsgService service = context.getBean("insta_service", MsgService.class); //insta_service'i newlemedik
+        //service.saveMessage(message); //service repoya bagimli ama biz enjekte etmedik.
         //yani biz constructor olusturmadan spring kendisi enjeckte edip olusturdu.
 
         //eger FileRepository Classinada component eklenip springin yapmasini istersek isimlendirme yapmaliyiz. Yoksa 2 componentten birini secemiyor spring.Yani assagidaki gibi yapmaliyiz:
         // @Qualifier("fileRepository") //buradan fileRepositorye kaydet demis olduk.InstaService icine yazdik.
 
 
+        //Random bir deger yazdiralim
+        //Random rnd = new Random();
+        Random rnd = context.getBean(Random.class); //bu classta newleme islemi yapmadik
+        System.out.println(rnd.nextInt(100));
+        SlackService service = context.getBean(SlackService.class);
+        service.saveMessage(message);
 
     }
 }
