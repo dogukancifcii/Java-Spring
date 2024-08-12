@@ -28,6 +28,7 @@ public class AppConfiguration {
 
     //@Value anatasyonu ile yaptigimiz islemleri enveriment ve properties isimli classlar ile yapalim
 
+    //assagida Properties yapisi vardir.Bu yapi key value mantigi ile calisir. Sol tarafa Service kismina cagirilacak isim sag tarafa ise environmet methodu ile application.properties icindeki degisken ismi yazilir.
     @Bean
     public Properties properties() {
 

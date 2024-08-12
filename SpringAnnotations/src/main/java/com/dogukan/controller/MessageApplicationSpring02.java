@@ -10,9 +10,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import java.util.Properties;
 
 public class MessageApplicationSpring02 {
-    @Autowired
-    Properties properties;
-
     public static void main(String[] args) {
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfiguration.class);
