@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 /*
 field injection-->ilk olustururken InstaService icinden olustururuz.Sonradan degistiremeyiz
 
@@ -18,6 +21,18 @@ constructor injection--> sonradan degistiremeyiz fakat ilk olustururken obje olu
 */
 @Component("insta_service")
 public class InstaService implements MsgService {
+
+    @PostConstruct
+    //obje olusturduktan hemen sonra calisicak method
+    public void postConstruct(){
+        System.out.println("------> Insta Service objesi olustu");
+    }
+
+    @PreDestroy
+    //obje silmeden hemen once calisicak method
+    public void preDestroy(){
+        System.out.println("------> Insta Service objesi imha edildi!!!");
+    }
 
     //field injection
 

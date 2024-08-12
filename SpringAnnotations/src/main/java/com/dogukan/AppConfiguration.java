@@ -12,7 +12,7 @@ import java.util.Random;
 public class AppConfiguration {
 
 
-    @Bean
+    @Bean //Bean=kucuk java objeleri
     public Random random() {
         return new Random(); //tek bir new keywordu ile istedigim kadar obje olusturabilirim!!!
     }

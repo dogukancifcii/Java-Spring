@@ -42,10 +42,31 @@ public class MessageApplicationSpring {
 
         //Random bir deger yazdiralim
         //Random rnd = new Random();
-        Random rnd = context.getBean(Random.class); //bu classta newleme islemi yapmadik
-        System.out.println(rnd.nextInt(100));
-        SlackService service = context.getBean(SlackService.class);
-        service.saveMessage(message);
+        //Random rnd = context.getBean(Random.class); //bu classta newleme islemi yapmadik
+        //System.out.println(rnd.nextInt(100));
+        //SlackService service = context.getBean(SlackService.class);
+        //service.saveMessage(message);
 
+        SlackService service1 =context.getBean(SlackService.class); //service1 isimli bir obje
+        SlackService service2 =context.getBean(SlackService.class);//service2 isimli bir obje
+
+        System.out.println(service1);
+        System.out.println(service2);
+
+        //Scope
+
+        //default olarak singleton oluyor: bu classtan sadece bir tane obje uretiyor ve her seferinde bu objeyi cagiriyor!!!
+        //bu olusturulan bean'in life cycle'ini Spring yonetir ve Spring sorumludur!!!
+
+        //prototype olarak degistirebiliriz : bu ise classtan her cagrildiginda farkli bir obje uretmeyi saglar!!!
+        //Beanlerin imhasindan Spring sorumlu degildir
+
+        //prototype yapinca adressler farkli olur farkli olursa objelerde farkli olur.Default olarak singelton olunca referansta ayni oldugu icin tek ikiside ayni obje olmus olur.
+        if (service1==service2){//== : hem referans hemde objenin degerini kontrol eder
+            System.out.println("bu objeler aynidir!!!");
+        }else {
+            System.out.println("bu objeler ayni degildir!!!");
+        }
+//
     }
 }
