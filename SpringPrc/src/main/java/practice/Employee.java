@@ -1,3 +1,5 @@
+package practice;
+
 public class Employee {
 
     private Integer id;
@@ -27,7 +29,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "practice.Employee{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
