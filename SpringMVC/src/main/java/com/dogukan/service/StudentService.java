@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class StudentService implements IStudentService {
+public class StudentService implements IStudentService {//Create + Update --delete
     @Autowired
     StudentRepository studentRepository;
 
     public List<Student> listAllStudent() {
         return studentRepository.findAll();
     }
+
 }
