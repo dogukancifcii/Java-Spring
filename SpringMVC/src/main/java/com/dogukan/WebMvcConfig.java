@@ -18,11 +18,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Bean
     public InternalResourceViewResolver resolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/views/"); //views dosyasi nerde
-        resolver.setSuffix(".jsp"); //views dosyasinin uzantisi ne
+        resolver.setPrefix("/WEB-INF/views/");//views dosyasi nerde
+        resolver.setSuffix(".jsp");//views dosyasinin uzantısı ne
         resolver.setViewClass(JstlView.class);
         //JSTL : javaStandartTagLibrary: JSP icinde daha az java kodu yazarak işlem yapmamızı saglar
-        return resolver;
+        return  resolver;
     }
 
     //statik sayfa iceren istek geldigi zaman servlata gonderilmesine gerek yok
@@ -30,8 +30,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/statics/**"). //bu url ile gelen istekleri db baglanmadan sun ya da statik olarak sun
-                addResourceLocations("/resources").//static kaynak yeri
+        registry.addResourceHandler("/resources/**").//bu url ile gelen istekleri db baglanmadan sun ya da statik olarak sun
+                addResourceLocations("/resources/").//statik kaynagimizin yeri
                 setCachePeriod(0);//cache periyodu icin sure verilir
     }
 }
