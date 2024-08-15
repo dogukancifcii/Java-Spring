@@ -11,16 +11,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class StudentRepository implements IStudentRepository{
+public class StudentRepository implements IStudentRepository {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
     public List<Student> findAll() {
-        Session session=sessionFactory.openSession();
-        Transaction trc=session.beginTransaction();
-        List <Student>studentList=session.createQuery("from Student",Student.class).getResultList();
+        Session session = sessionFactory.openSession();
+        Transaction trc = session.beginTransaction();
+        List<Student> studentList = session.createQuery("from Student", Student.class).getResultList();
         trc.commit();
         session.close();
         return studentList;
@@ -28,7 +28,12 @@ public class StudentRepository implements IStudentRepository{
 
     @Override
     public void saveOrUpdate(Student student) {
-
+        Session session = sessionFactory.openSession();
+        Transaction trc = session.beginTransaction();
+        //insert into
+        session.saveOrUpdate(student);//dbde eger deger varsa update ediyor yoksa yani obje olusturuyor
+        trc.commit();
+        session.close();
     }
 
     @Override

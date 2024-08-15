@@ -6,18 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
-public class StudentService implements IStudentService{
+public class StudentService implements IStudentService {
 
     @Autowired
     IStudentRepository studentRepository;
+
     public List<Student> listAllStudent() {
         return studentRepository.findAll();
     }
 
     @Override
     public void addOrUpdateStudent(Student student) {
-
+        studentRepository.saveOrUpdate(student);
     }
 
     @Override
