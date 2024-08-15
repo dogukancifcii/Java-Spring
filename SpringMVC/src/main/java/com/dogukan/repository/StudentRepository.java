@@ -40,4 +40,5 @@ public class StudentRepository implements IStudentRepository{
     public Optional<Student> findById(Long id) {
         return Optional.empty();
     }
+    //optional cekme sebebi null point exception almamak icin.
 }

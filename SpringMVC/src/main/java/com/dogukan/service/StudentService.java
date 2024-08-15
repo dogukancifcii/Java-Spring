@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class StudentService implements IStudentService{
+
     @Autowired
     IStudentRepository studentRepository;
     public List<Student> listAllStudent() {

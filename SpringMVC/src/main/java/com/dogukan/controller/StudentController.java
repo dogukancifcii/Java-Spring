@@ -36,7 +36,7 @@ public class StudentController {
 
 
     //1-tüm öğrencileri listeleme
-    //http:localhost:8080/B256SpringMVC/students
+    //http:localhost:8080/SpringMVC/students
     @GetMapping
     public ModelAndView getStudents(){//response
         ModelAndView mav=new ModelAndView();
