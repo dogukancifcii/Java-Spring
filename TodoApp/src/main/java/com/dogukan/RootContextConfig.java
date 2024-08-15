@@ -29,7 +29,6 @@ public class RootContextConfig {
         sessionFactory.setPackagesToScan("com.tpe.domain");
 
         return sessionFactory;
-
     }
 
 
