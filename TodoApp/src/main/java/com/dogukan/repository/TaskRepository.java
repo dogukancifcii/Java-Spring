@@ -24,7 +24,6 @@ public class TaskRepository {
         session.saveOrUpdate(task);//id ye gore tabloda varsa update,yoksa create islemi yapar.
 
 
-
         tx.commit();
         session.close();
 
@@ -32,10 +31,11 @@ public class TaskRepository {
 
 
     public List<Task> getAll() {
+
         return null;
     }
 
-    public Task findById() {
+    public Task findById(Long id) {
         return null;
     }
 
