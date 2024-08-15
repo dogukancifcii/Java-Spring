@@ -5,6 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "t_student")
@@ -61,8 +62,9 @@ public class Student {
         this.grade = grade;
     }
 
-    public LocalDateTime getCreateDate() {
-        return createDate;
+    public String getCreateDate() {
+        DateTimeFormatter dtf=DateTimeFormatter.ofPattern("dd.MM.yy hh:mm");
+        return createDate.format(dtf);
     }
 
 //    public void setCreateDate(LocalDateTime createDate) {

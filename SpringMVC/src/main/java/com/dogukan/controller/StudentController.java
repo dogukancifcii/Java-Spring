@@ -5,10 +5,7 @@ import com.dogukan.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -62,11 +59,26 @@ public class StudentController {
     //http:localhost:8080/B256SpringMVC/students/redirect:/students
     @PostMapping("/saveStudent") //saveStudents pathine gonderiyor
     public String addStudent(@Valid @ModelAttribute("student") Student student, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()){
+        //bindingReseult sayesinde hatalari gostermemizi sagliyor.
+        if (bindingResult.hasErrors()) {
             return  "studentForm";
         }
         service.addOrUpdateStudent(student);
         return "redirect:/students"; //students listesi pathine gonderme islemi
     }
 
+
+    //3-mevcut ogrenciyi guncelleme
+    //http:localhost:8080/SpringMVC/students/update?id=1 + get
+    @GetMapping("/update")
+    public ModelAndView sendFormForUpdate(@RequestParam("id")Long id){
+        Student foundStudent=service.findStudentById(id);
+        ModelAndView mav=new ModelAndView();
+        mav.addObject("student",foundStudent);
+        mav.setViewName("studentForm");
+        return mav;
+    }
+
+    //4-mevcut ogrenciyi silme
+    //http:localhost:8080/SpringMVC/students/update?id=1 + get
 }
