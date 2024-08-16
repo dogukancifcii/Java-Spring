@@ -28,8 +28,8 @@ public class StudentRepository implements IStudentRepository {
 
     @Override
     public void saveOrUpdate(Student student) {
-        Session session= sessionFactory.openSession();
-        Transaction trc=session.beginTransaction();
+        Session session = sessionFactory.openSession();
+        Transaction trc = session.beginTransaction();
         //insert into
         session.saveOrUpdate(student);//db eger deger varsa update ediyor yoksa yeni obje olusturur
         trc.commit();
@@ -38,13 +38,17 @@ public class StudentRepository implements IStudentRepository {
 
     @Override
     public void delete(Student student) {
-
+        Session session = sessionFactory.openSession();
+        Transaction trc = session.beginTransaction();
+        session.delete(student);
+        trc.commit();
+        session.close();
     }
 
     @Override
     public Optional<Student> findById(Long id) {
         Session session = sessionFactory.openSession();
-        Student student = session.get(Student.class,id);
+        Student student = session.get(Student.class, id);
         Optional<Student> optional = Optional.ofNullable(student);
         session.close();
         return optional;

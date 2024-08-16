@@ -61,7 +61,7 @@ public class StudentController {
     public String addStudent(@Valid @ModelAttribute("student") Student student, BindingResult bindingResult) {
         //bindingReseult sayesinde hatalari gostermemizi sagliyor.
         if (bindingResult.hasErrors()) {
-            return  "studentForm";
+            return "studentForm";
         }
         service.addOrUpdateStudent(student);
         return "redirect:/students"; //students listesi pathine gonderme islemi
@@ -71,14 +71,21 @@ public class StudentController {
     //3-mevcut ogrenciyi guncelleme
     //http:localhost:8080/SpringMVC/students/update?id=1 + get
     @GetMapping("/update")
-    public ModelAndView sendFormForUpdate(@RequestParam("id")Long id){
-        Student foundStudent=service.findStudentById(id);
-        ModelAndView mav=new ModelAndView();
-        mav.addObject("student",foundStudent);
+    public ModelAndView sendFormForUpdate(@RequestParam("id") Long id) {
+        Student foundStudent = service.findStudentById(id);
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("student", foundStudent);
         mav.setViewName("studentForm");
         return mav;
     }
 
     //4-mevcut ogrenciyi silme
-    //http:localhost:8080/SpringMVC/students/update?id=1 + get
+    //http:localhost:8080/SpringMVC/students/delete/id + get
+    @GetMapping("/delete/{id}")
+    public String deleteStudent(@PathVariable("id") Long id) {
+        service.deleteStudentById(id);
+        return "redirect:/students";
+    }
+
+    
 }

@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class StudentService implements IStudentService{
+public class StudentService implements IStudentService {
     @Autowired
     IStudentRepository studentRepository;
+
     public List<Student> listAllStudent() {
         return studentRepository.findAll();
     }
@@ -23,8 +24,8 @@ public class StudentService implements IStudentService{
 
     @Override
     public Student findStudentById(Long id) {
-        Student foundStudent=studentRepository.findById(id).
-                orElseThrow(()-> new StudentNotFoundException("Student not Found by ID : "+id));
+        Student foundStudent = studentRepository.findById(id).
+                orElseThrow(() -> new StudentNotFoundException("Student not Found by ID : " + id));
         //findById methodu geriye optional dondurur
         //student varsa foundStudent objesine degeri atar
         //eger optional'in icin bosya elseThrow methodu bize olusturdugumuz exception'i firlatmayi saglar
@@ -33,6 +34,6 @@ public class StudentService implements IStudentService{
 
     @Override
     public void deleteStudentById(Long id) {
-
+        studentRepository.delete(findStudentById(id));
     }
 }
