@@ -1,6 +1,7 @@
 package com.dogukan.controller;
 
 import com.dogukan.domain.Student;
+import com.dogukan.exception.StudentNotFoundException;
 import com.dogukan.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -87,5 +88,12 @@ public class StudentController {
         return "redirect:/students";
     }
 
-    
+    @ExceptionHandler(StudentNotFoundException.class)
+    public ModelAndView handlerException(Exception ex) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("message", ex.getMessage());
+        mav.setViewName("notFound");
+        return mav;
+
+    }
 }
