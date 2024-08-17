@@ -37,7 +37,7 @@ public class Student {
     @NotBlank(message = "Name can not be blank") //request aninda dogrulama yapar
     @Size(min = 2, max = 50, message = "name must be between 2 and 50")//Size karakter icin kullanilir.
     @Column(nullable = false)
-    /*final*/ private String lastname;
+    /*final*/ private String lastName;
 
     @NotNull(message = "grade can not be null")//notBlank ve NotEnty sayisal degerde kullanilamaz
     @Column(nullable = false)

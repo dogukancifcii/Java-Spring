@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository //opsiyoneldir sebebi JpaRepository oldugu icin
-public interface StudentRepository extends JpaRepository<Student, Long> { //generics yaptisi ilk kisim entity aliyor ikinci kisim id tipini aliyor.
-    //JpaRepository sayesinde metodlari kendisi olusturuyor.
+//generics yaptisi ilk kisim entity aliyor ikinci kisim id tipini aliyor.
+//JpaRepository sayesinde metodlari kendisi olusturuyor.
+public interface StudentRepository extends JpaRepository<Student, Long> {
+    boolean existsByEmail(String email);
 }

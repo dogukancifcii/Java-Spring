@@ -1,6 +1,7 @@
 package com.dogukan.service;
 
 import com.dogukan.domain.Student;
+import com.dogukan.exception.ConflictException;
 import com.dogukan.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,18 @@ public class StudentService {
     //1-b
     public List<Student> getAllStudents() {
         return repository.findAll();
+    }
+
+    //4-ogrenciyi kaydetme
+    public void saveStudent(Student student) {
+
+        //student daha once tabloya eklenmis mi : tabloda ayni emaile sahip baska student var mi ?
+        //SELECT * FROM student WHERE email = student.getEmail()-->t/f
+
+        if (repository.existsByEmail(student.getEmail())) {
+            //bu email daha once kullanilmis -- >hata firlatalim
+            throw new ConflictException("Email already exists!");
+        }
+        repository.save(student); //insert into...
     }
 }
