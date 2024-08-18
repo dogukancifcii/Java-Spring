@@ -2,6 +2,7 @@ package com.dogukan.service;
 
 import com.dogukan.domain.Student;
 import com.dogukan.exception.ConflictException;
+import com.dogukan.exception.ResourceNotFoundException;
 import com.dogukan.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,13 @@ public class StudentService {
             throw new ConflictException("Email already exists!");
         }
         repository.save(student); //insert into...
+    }
+
+    //6- id si verilen ogrenciyi bulma
+    public Student getStudentById(Long id) {
+        Student student = repository.findById(id).
+                orElseThrow(() -> new ResourceNotFoundException("Student is not found by id" + id));
+        //optional deger donduruyor.optional null deger dondurebilir demek
+        return student;
     }
 }

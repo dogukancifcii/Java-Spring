@@ -78,4 +78,21 @@ public class StudentController {
         return new ResponseEntity<>("Student is created successfully...", HttpStatus.CREATED);//201
     }
 
+    //5-query param ile id si verilen öğrenciyi getirme
+    //request: http://localhost:8080/students/query?id=1 + GET
+    //response: student + 200
+    @GetMapping("/query")
+    public ResponseEntity<Student> getStudent(@RequestParam("id") Long id) {
+        Student student = service.getStudentById(id);
+        return new ResponseEntity<>(student, HttpStatus.OK);//200
+    }
+
+    //Odev:(Alternatif)5-path param ile id si verilen öğrenciyi getirme
+    //request: http://localhost:8080/students/1 + GET
+    //response: student + 200
+    @GetMapping("/{id}")
+    public ResponseEntity<Student> getStudentById(@PathVariable("id") Long id) {
+        Student student = service.getStudentById(id);
+        return new ResponseEntity<>(student, HttpStatus.OK);//200
+    }
 }

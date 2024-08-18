@@ -10,5 +10,6 @@ import org.springframework.stereotype.Repository;
 //JpaRepositorydeki motodlar Spring tarafindan otomatik olarak implemente edilir.
 //JpaRepository sayesind otomatik dbyle iletisime gecegimiz methodlar vardir.
 public interface StudentRepository extends JpaRepository<Student, Long> {
+    //JpaRepositorydeki hazir methodlarin isimlerini tureterek method olusturabiliyoruz.Dikkat etmemiz gereken nokta istedigimiz methoda benzer method olmadi ve olusturacagimiz methodun field kismi bizde olmalidir.Normalde methodu olusturup implement etmemiz gerekir ama JpaRepository sayesinde kok dizine gore implement etmeden method olusturabiliyoruz.
     boolean existsByEmail(String email);
 }
