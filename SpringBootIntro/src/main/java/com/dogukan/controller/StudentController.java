@@ -11,7 +11,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 //responsebody:metodun donus degerini JSON formatinda cevap olarak hazirlar
-@RestController //bu classta Restful servisler yazilacak, requestlere karsilik responseler olusturacak.
+@RestController
+//bu classta Restful servisler yazilacak, requestlere karsilik responseler olusturacak.Controller anatasyonunun ozellesmis halidir.
 /*"RESTful" terimi, Representational State Transfer (REST) mimari tarzına uygun olarak tasarlanmış web servislerini ifade eder. RESTful web servisleri, HTTP protokolü üzerinden veri iletimi yapar ve genellikle basit, stateless (durumsuz) işlemler sunar.*/
 @RequestMapping("/students")//http://localhost:8080/students/...
 @RequiredArgsConstructor
@@ -37,9 +38,10 @@ public class StudentController {
     //1-tum ogrencileri listeleyelim : READ
     //http://localhost:8080/students + GET
     //response: Tum ogrencilerin listesini + 200 : OK (Http Status Kodu)
+
     @GetMapping
     // @ResponseBody--RestController içinde var, bu sebeple gerek kalmadı!!!
-    public ResponseEntity<List<Student>> listAllStudents() { //responseEntity verme sebebimiz Http Status olarak 200 alabilmek icin
+    public ResponseEntity<List<Student>> listAllStudents() { //responseEntity verme sebebimiz Http Status olarak 200 alabilmek icin.hem datalari hemde status kod icin ResponseEntity kullandik
         //tablodan tum ogrencileri getirelim
         List<Student> studentList = service.getAllStudents();
         return new ResponseEntity<>(studentList, HttpStatus.OK); //200
@@ -51,6 +53,8 @@ public class StudentController {
 
     //3-öğrenci ekleme : CREATE
     //Request : http://localhost:8080/students + POST + body(JSON)
+
+    //body(JSON):
     /*
     {
      "name":"Jack",
@@ -60,13 +64,18 @@ public class StudentController {
     }
      */
     //response: başarılı mesaj + 201 (CREATED)
+
+
     @PostMapping
     //@RequestBody : requestin bodysini almamızı sağlar
+    //@RequestBody : Postmandeki JSON formatini alip Studenta cevirecek.Postmande JSON formatinda yazdigimiz yer requestbody oluyor.
     //jackson:bodydeki JSON formatını --> Student objesine dönüştürüyor
+    // @ResponseBody--RestController içinde var, bu sebeple gerek kalmadı!!!
+    //valid anatasyonu Student Entityde koydugunuz sartlari karsiliyormu diye kontrol ediyor
     public ResponseEntity<String> createStudent(@Valid @RequestBody Student student) {
         service.saveStudent(student);
 
-        return new ResponseEntity<>("Student is created successfully...", HttpStatus.CREATED);
+        return new ResponseEntity<>("Student is created successfully...", HttpStatus.CREATED);//201
     }
 
 }

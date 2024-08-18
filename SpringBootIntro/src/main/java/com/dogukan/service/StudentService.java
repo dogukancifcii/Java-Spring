@@ -20,7 +20,7 @@ public class StudentService {
     //burada yukaridaki RequiredArgsConstructor sayesinde const injection yapmis olduk.
     private final StudentRepository repository;
 
-    //1-b
+    //2-tum kayitlari listeleme
     public List<Student> getAllStudents() {
         return repository.findAll();
     }
