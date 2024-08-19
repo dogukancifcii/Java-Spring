@@ -32,7 +32,13 @@ public class TaskRepository {
 
     public List<Task> getAll() {
 
-        return null;
+        Session session = sessionFactory.openSession();
+
+        List<Task> taskList = session.createQuery("FROM Task", Task.class).getResultList();
+
+        session.close();
+
+        return taskList;
     }
 
     public Task findById(Long id) {

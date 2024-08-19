@@ -5,30 +5,24 @@ import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Entity
-@Table
 public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Please provide a valid description")
-    //kullanici input kutusuna girmeye basladigi an bu uyariyi vermemizi saglar.Eger assagiadaki nullaable olursa girdikten sonra hata verirdi.
-    @Size(max = 150, message = "Please provide a valid length!")//henuz forma giris yaparken uyari yapar
-    @Column(length = 150, nullable = false)//data baseye girdikten sonra uyari verir
+    @NotBlank(message = "Please provide a valid description!")
+    @Size(max=150, message ="Please provide a valid length!" )
+    @Column(length = 150,nullable = false)
     private String description;
 
-    private LocalDate date;
+    private LocalDate date=LocalDate.now();
 
-    @NotNull(message = "Please provide a valid level!")
     @Max(value = 5, message = "Level cannot be greater than 5!")
     @Min(value = 1, message = "Level cannot be lower than 1!")
-    private Integer level;//1,2,3,4,5
+    @NotNull(message ="Please provide a level!" )
+    private Integer level;//1.2.3.4.5
 
-    @PrePersist
-    public void prePersistSetDate() {
-        this.date = LocalDate.now();
-    }
 
     //getter-setter
 
@@ -63,5 +57,4 @@ public class Task {
     public void setLevel(Integer level) {
         this.level = level;
     }
-
 }

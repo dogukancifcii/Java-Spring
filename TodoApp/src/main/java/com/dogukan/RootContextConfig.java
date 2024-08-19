@@ -26,7 +26,7 @@ public class RootContextConfig {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setHibernateProperties(hibernateProperties());
-        sessionFactory.setPackagesToScan("com.tpe.domain");
+        sessionFactory.setPackagesToScan("com.dogukan.domain");
 
         return sessionFactory;
     }
