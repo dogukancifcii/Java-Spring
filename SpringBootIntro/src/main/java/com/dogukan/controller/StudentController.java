@@ -4,6 +4,10 @@ import com.dogukan.domain.Student;
 import com.dogukan.dto.UpdateStudentDTO;
 import com.dogukan.service.StudentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -117,5 +121,28 @@ public class StudentController {
         service.updateStudent(id, studentDTO);
 
         return new ResponseEntity<>("Student is updated successfully", HttpStatus.CREATED);//201
+    }
+
+    //11-tum ogrencileri listeleme: READ
+    //tum kayitlari page page (sayfa sayfa) gosterelim
+    //request :
+    //http://localhost:8080/students/page?
+    //                               page=1&
+    //                               size=10&
+    //                               sort=name&
+    //                               direction=DESC(ASC) + GET
+
+    // 1 | 2 | 3 | 4 ......
+
+    @GetMapping("/page")
+    public ResponseEntity<Page<Student>> getAllStudentsByPage(@RequestParam("page") int pageNo, @RequestParam("size") int size, @RequestParam("sort") String property, @RequestParam("direction") Sort.Direction direction) {
+
+        Pageable pageable = PageRequest.of(pageNo, size, Sort.by(direction, property));
+        //findAll metodunun sayfa getirmesi icin gerekli olan bilgileri
+        //pageable tipini verebiliriz.
+
+        Page<Student> studentsPage = service.getAllStudentsPaging(pageable);
+
+        return new ResponseEntity<>(studentsPage, HttpStatus.OK);
     }
 }

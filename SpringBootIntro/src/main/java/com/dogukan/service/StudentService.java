@@ -7,6 +7,8 @@ import com.dogukan.exception.ResourceNotFoundException;
 import com.dogukan.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -82,5 +84,11 @@ public class StudentService {
 
         repository.save(foundStudent);//saveOrUpdate gibi calisir.
 
+    }
+
+    //12- tablodaki tum kayitlardan istenen ogrenci sayfasini getirme
+    public Page<Student> getAllStudentsPaging(Pageable pageable) {
+        return repository.findAll(pageable); //istenen bilgiler verilirse tum kayitlardan sadece ilgili sayfayi getirir.
+        //istenen bilgileri pageable ile toplu olarak verebiliriz:sayfaNo,her sayfada kayit sayisi, siralama bilgisi(hangi ozellik ,hangi yonde)
     }
 }
