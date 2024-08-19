@@ -60,5 +60,17 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
-    
+    //guncelleme : //localhost:8080/TodoApp/tasks/update?id=1 + GET
+
+    @GetMapping("/update")
+    public ModelAndView displayFormForUpdate(@RequestParam("id") Long identity) {
+
+        Task foundTask = service.findTaskById(identity); //belirli iddeki taski getirme
+
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("taskForm"); //taskFrom.js sayfasi gelsin diyoruz
+        mav.addObject("task", foundTask); //dbdeki belirle id deki taski alip form icine yarlestir demek.ilk yazdigimiz task kismi taskForm.js icindeki ModelAttribute icinde yaziyor
+
+        return mav;
+    }
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class TaskRepository {
@@ -41,8 +42,15 @@ public class TaskRepository {
         return taskList;
     }
 
-    public Task findById(Long id) {
-        return null;
+    public Optional<Task> findById(Long id) {
+        Session session = sessionFactory.openSession();
+        Task task = session.get(Task.class, id); //olmayan id ile null deger dondurur
+
+        Optional<Task> optional = Optional.ofNullable(task); //Dikkat icinden null cikabilir
+
+        session.close();
+
+        return optional;
     }
 
     public void delete(Long id) {

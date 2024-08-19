@@ -26,7 +26,10 @@ public class TaskService {
     }
 
     public Task findTaskById(Long id) {
-        return null;
+        Task task = repository.findById(id).orElseThrow(
+                () -> new RuntimeException("Task is not found by ID"));
+        //burada optional olan yeri eger null dondururse yani olmayan id gelirse hata firlaticak
+        return task;
     }
 
     public void deleteTask(Long id) {
