@@ -95,4 +95,14 @@ public class StudentController {
         Student student = service.getStudentById(id);
         return new ResponseEntity<>(student, HttpStatus.OK);//200
     }
+
+    //7-path param ile id si verilen öğrenciyi silme
+    //request: http://localhost:8080/students/1 + DELETE
+    //response : basarili mesaj + 200
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteStudent(@PathVariable Long id) {
+        service.deleteStudentById(id);
+        //return new ResponseEntity<>("Student is deleted successfully", HttpStatus.OK); //200
+        return ResponseEntity.ok("Student is deleted successfully"); //yukaridakinin ayni yazimi aslinda sadece cok kullanildigi icin static methodunu yapmislar.
+    }
 }

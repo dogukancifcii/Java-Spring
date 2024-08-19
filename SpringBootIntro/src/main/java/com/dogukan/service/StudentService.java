@@ -44,6 +44,18 @@ public class StudentService {
         Student student = repository.findById(id).
                 orElseThrow(() -> new ResourceNotFoundException("Student is not found by id" + id));
         //optional deger donduruyor.optional null deger dondurebilir demek
+        //eger null olursa exception firlat demis olduk bu sayede id olmazsa bilgimiz oluyor.
         return student;
+    }
+
+    //8-id si verilen ogrenciyi silme
+    public void deleteStudentById(Long id) {
+
+        //repository.deleteById(id);//delete from student where id =9999;
+        //bu idye sahip bir ogrenci (satir) yoksa???
+        //ozel bir mesaj ile ozel bir exception firlatmak istiyoruz
+
+        Student student = getStudentById(id); //yukaridaki method ile id si verilen ogrenciyi bulur eger yoksa hata exception firlaticak sekilde method yazmistik
+        repository.delete(student);
     }
 }
