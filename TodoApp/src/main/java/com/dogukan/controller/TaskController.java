@@ -4,10 +4,7 @@ import com.dogukan.domain.Task;
 import com.dogukan.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Provider;
@@ -53,6 +50,14 @@ public class TaskController {
         modelAndView.addObject("tasks", taskList);
         modelAndView.setViewName("tasks");//tasks.jsp
         return modelAndView;
+    }
+
+    //silme : //localhost:8080/TodoApp/tasks/delete/1 + GET
+    // --> response:tum taskleri listeleyelim
+    @GetMapping("/delete/{identity}")
+    public String deleteTask(@PathVariable("identity") Long id) {
+        service.deleteTask(id);
+        return "redirect:/tasks";
     }
 
     

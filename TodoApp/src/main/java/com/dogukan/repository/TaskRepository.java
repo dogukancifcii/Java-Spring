@@ -46,6 +46,15 @@ public class TaskRepository {
     }
 
     public void delete(Long id) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
 
+        //id si verilen obje getirme
+        Task task = session.load(Task.class, id);
+
+        session.delete(task);
+
+        tx.commit();
+        session.close();
     }
 }
