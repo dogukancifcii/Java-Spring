@@ -1,6 +1,7 @@
 package com.dogukan.controller;
 
 import com.dogukan.domain.Student;
+import com.dogukan.dto.UpdateStudentDTO;
 import com.dogukan.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -104,5 +105,17 @@ public class StudentController {
         service.deleteStudentById(id);
         //return new ResponseEntity<>("Student is deleted successfully", HttpStatus.OK); //200
         return ResponseEntity.ok("Student is deleted successfully"); //yukaridakinin ayni yazimi aslinda sadece cok kullanildigi icin static methodunu yapmislar.
+    }
+
+    //9-path param ile id si verilen ogrenciyi guncelleme:name,lastName,email
+    //request: http://localhost:8080/students/1 + PUT/PATCH + BODY(JSON)
+    //response : basarili mesaj + 201
+    //bilgilerin bir kismi guncellenecekse PATCH eger tamamini guncelleyeceksek PUT metodunu kullaniyoruz
+    @PatchMapping("/{id}")
+    public ResponseEntity<String> updateStudent(@PathVariable Long id, @Valid @RequestBody UpdateStudentDTO studentDTO) {//dogrudan entity objesine degil DTO objesine koyuyoruz ki guvenlik ve hiz acisindan servis katmanina kadar dto tasiyor.
+
+        service.updateStudent(id, studentDTO);
+
+        return new ResponseEntity<>("Student is updated successfully", HttpStatus.CREATED);//201
     }
 }

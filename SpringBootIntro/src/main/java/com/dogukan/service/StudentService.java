@@ -1,6 +1,7 @@
 package com.dogukan.service;
 
 import com.dogukan.domain.Student;
+import com.dogukan.dto.UpdateStudentDTO;
 import com.dogukan.exception.ConflictException;
 import com.dogukan.exception.ResourceNotFoundException;
 import com.dogukan.repository.StudentRepository;
@@ -57,5 +58,29 @@ public class StudentService {
 
         Student student = getStudentById(id); //yukaridaki method ile id si verilen ogrenciyi bulur eger yoksa hata exception firlaticak sekilde method yazmistik
         repository.delete(student);
+    }
+
+    //10- id si verilen ogrencinin isim,soyisim,emailini degistirme
+    public void updateStudent(Long id, UpdateStudentDTO studentDTO) {
+        Student foundStudent = getStudentById(id);//1,"Jack","Sparrow","Jack@mail.com",...
+
+        //emailin unique olmasina engel var mi???
+        //DTOda gelen email             tablodaki email
+        //1-xxx@mail.com                YOK     V   (existByEmail:false) -->update
+        //2-harry@mail.com              id:2 olan ogrencinin maili  X  (existByEmail:true) -->ConflictException
+        //3-jack@mail.com               kendisine ait V (existByEmail:true)
+
+        //istek ile gonderilen email daha once kullanilmis mi ?
+        boolean existsEmail = repository.existsByEmail(studentDTO.getEmail());
+        if (existsEmail && !foundStudent.getEmail().equals(studentDTO.getEmail())) {
+            //cakisma var
+            throw new ConflictException("Email already exists");
+        }
+        foundStudent.setName(studentDTO.getName());
+        foundStudent.setLastName(studentDTO.getLastName());
+        foundStudent.setEmail(studentDTO.getEmail());
+
+        repository.save(foundStudent);//saveOrUpdate gibi calisir.
+
     }
 }
