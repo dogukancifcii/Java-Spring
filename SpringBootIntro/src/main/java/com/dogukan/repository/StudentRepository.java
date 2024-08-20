@@ -1,12 +1,14 @@
 package com.dogukan.repository;
 
 import com.dogukan.domain.Student;
+import com.dogukan.dto.StudentDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository //opsiyoneldir sebebi JpaRepository oldugu icin
@@ -36,5 +38,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     List<Student> filterStudentsByGradeSQL(@Param("pGrade") Integer grade);
 
 
-
+    //18-JPQL ile tablodan gelen entity objesi DTO nun constructori ile DTO objesine donusturulur.
+    @Query("SELECT new com.dogukan.dto.StudentDTO(s) FROM Student s WHERE id=:pId")
+    Optional<StudentDTO> findStudentDTOById(@Param("pId") Long id);
 }

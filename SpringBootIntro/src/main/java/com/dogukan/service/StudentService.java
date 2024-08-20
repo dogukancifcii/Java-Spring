@@ -82,7 +82,7 @@ public class StudentService {
         foundStudent.setName(studentDTO.getName());
         foundStudent.setLastName(studentDTO.getLastName());
         foundStudent.setEmail(studentDTO.getEmail());
-        
+
 
         repository.save(foundStudent);//saveOrUpdate gibi calisir.
 
@@ -108,12 +108,24 @@ public class StudentService {
 
     //16-odev
 
-
+    //18-a: DB den id si verilen entity getirip tasiyalim
     //18-ogrencinin bazi fieldlarini DTO olarak dondurmek
     public StudentDTO getStudentInfoById(Long id) {
         Student foundStudent = getStudentById(id);
 
-        StudentDTO studentDTO = new StudentDTO(foundStudent.getName(), foundStudent.getLastName(), foundStudent.getGrade());
+        //StudentDTO studentDTO = new StudentDTO(foundStudent.getName(), foundStudent.getLastName(), foundStudent.getGrade());
+        //student(entity) -->studentDTO(DTO)
+
+        StudentDTO studentDTO = new StudentDTO(foundStudent);
+
+        return studentDTO;
+    }
+
+    //18-b:DB(tablo)den direk DTO(name,lastname,grade) cekme
+    public StudentDTO getStudentInfoByDTO(Long id) {
+
+        StudentDTO studentDTO = repository.findStudentDTOById(id).
+                orElseThrow(() -> new ResourceNotFoundException("Student Info is Not Found By id: " + id));
 
         return studentDTO;
     }

@@ -1,5 +1,6 @@
 package com.dogukan.dto;
 
+import com.dogukan.domain.Student;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,12 @@ public class StudentDTO {//Basit bir POJO Class
 
     @NotNull(message = "grade can not be null")
     private Integer grade;
+
+    public StudentDTO(Student student) {
+        this.name = student.getName();
+        this.lastName = student.getLastName();
+        this.grade = student.getGrade();
+    }
 
 
 }

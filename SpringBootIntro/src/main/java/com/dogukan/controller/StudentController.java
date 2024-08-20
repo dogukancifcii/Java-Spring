@@ -168,14 +168,21 @@ public class StudentController {
     //isim veya soyisim olunca ikisinden birini girince çıktı vermesıni isityoruz
 
 
-    //17-id si verilen ogrencinin lastName ve emailini getirelim
+    //17-id si verilen ogrencinin name, lastName ve grade getirelim
     //request:http://localhost:8080/students/info/2 + GET
     //response : id si verilen öğrencinin sadece 3 fieldını DTO ile + 200
 
     @GetMapping("/info/{id}")
     public ResponseEntity<StudentDTO> getStudentInfo(@PathVariable Long id) {
-        StudentDTO studentDTO = service.getStudentInfoById(id);
+
+        //StudentDTO studentDTO = service.getStudentInfoById(id);
+        StudentDTO studentDTO = service.getStudentInfoByDTO(id);
 
         return ResponseEntity.ok(studentDTO); //200
     }
+
+    //ÖDEVVV:) JPA reponun hazır metodunu türeterek veya
+    //          JPQL ile custom sorgu yazarak
+    //19-name içinde "al" hecesi geçen öğrencileri filtreleyelim: READ//ex:halil
+    //http://localhost:8080/students/filter?word=al + GET
 }
