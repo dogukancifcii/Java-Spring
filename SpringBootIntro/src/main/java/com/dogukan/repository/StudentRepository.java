@@ -26,4 +26,15 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     //Bunu yapamamizin sebebi eger JPA repositoryde benzemeyen bir method olusturuyorsak Query tanimlayarak JPA repositorye boyle tanimliyoruz
     @Query("FROM Student WHERE grade=:pGrade")
     List<Student> filterStudentsByGrade(@Param("pGrade") Integer grade);
+
+
+    //14-c
+    //SQL
+    //Query kisminda sorgu yazmamiza yariyor.
+    //Bunu yapamamizin sebebi eger JPA repositoryde benzemeyen bir method olusturuyorsak Query tanimlayarak JPA repositorye boyle tanimliyoruz
+    @Query(value = "SELECT * FROM Student WHERE grade=:pGrade", nativeQuery = true)
+    List<Student> filterStudentsByGradeSQL(@Param("pGrade") Integer grade);
+
+
+
 }

@@ -1,6 +1,7 @@
 package com.dogukan.service;
 
 import com.dogukan.domain.Student;
+import com.dogukan.dto.StudentDTO;
 import com.dogukan.dto.UpdateStudentDTO;
 import com.dogukan.exception.ConflictException;
 import com.dogukan.exception.ResourceNotFoundException;
@@ -81,6 +82,7 @@ public class StudentService {
         foundStudent.setName(studentDTO.getName());
         foundStudent.setLastName(studentDTO.getLastName());
         foundStudent.setEmail(studentDTO.getEmail());
+        
 
         repository.save(foundStudent);//saveOrUpdate gibi calisir.
 
@@ -102,5 +104,17 @@ public class StudentService {
         //Eger JPA repositorye bagimli kalmadan kendimiz metod ureticek olsaydik
         return repository.filterStudentsByGrade(grade);
 
+    }
+
+    //16-odev
+
+
+    //18-ogrencinin bazi fieldlarini DTO olarak dondurmek
+    public StudentDTO getStudentInfoById(Long id) {
+        Student foundStudent = getStudentById(id);
+
+        StudentDTO studentDTO = new StudentDTO(foundStudent.getName(), foundStudent.getLastName(), foundStudent.getGrade());
+
+        return studentDTO;
     }
 }

@@ -1,6 +1,7 @@
 package com.dogukan.controller;
 
 import com.dogukan.domain.Student;
+import com.dogukan.dto.StudentDTO;
 import com.dogukan.dto.UpdateStudentDTO;
 import com.dogukan.service.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -153,5 +154,28 @@ public class StudentController {
     public ResponseEntity<List<Student>> getAllStudentByGrade(@PathVariable Integer grade) {
         List<Student> studentList = service.getAllStudentByGrade(grade);
         return new ResponseEntity<>(studentList, HttpStatus.OK); //200
+    }
+
+    //ODEV:
+    //JPA reponun hazir metodlari
+    //JPQL/SQL ile custom sorgu
+    //15-lastname ile öğrencileri filtreleyelim
+    //request:http://localhost:8080/students/lastname?lastname=Potter + GET
+    //response : lastname e sahip olan öğrenci listesi + 200
+
+    //Meraklisina odev: isim veya soyisme gore filtreleme
+    //request:http://localhost:8080/students/search?word=harry + GET
+    //isim veya soyisim olunca ikisinden birini girince çıktı vermesıni isityoruz
+
+
+    //17-id si verilen ogrencinin lastName ve emailini getirelim
+    //request:http://localhost:8080/students/info/2 + GET
+    //response : id si verilen öğrencinin sadece 3 fieldını DTO ile + 200
+
+    @GetMapping("/info/{id}")
+    public ResponseEntity<StudentDTO> getStudentInfo(@PathVariable Long id) {
+        StudentDTO studentDTO = service.getStudentInfoById(id);
+
+        return ResponseEntity.ok(studentDTO); //200
     }
 }
