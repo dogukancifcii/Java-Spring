@@ -145,4 +145,13 @@ public class StudentController {
 
         return new ResponseEntity<>(studentsPage, HttpStatus.OK);
     }
+
+    //13-grade ile ogrencileri filtreleyelim
+    //request: http://localhost:8080/students/grade/100 + GET
+    //response : 100 grade e sahip olan ogrenci listesi + 200
+    @GetMapping("/grade/{grade}")
+    public ResponseEntity<List<Student>> getAllStudentByGrade(@PathVariable Integer grade) {
+        List<Student> studentList = service.getAllStudentByGrade(grade);
+        return new ResponseEntity<>(studentList, HttpStatus.OK); //200
+    }
 }

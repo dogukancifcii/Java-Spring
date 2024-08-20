@@ -91,4 +91,16 @@ public class StudentService {
         return repository.findAll(pageable); //istenen bilgiler verilirse tum kayitlardan sadece ilgili sayfayi getirir.
         //istenen bilgileri pageable ile toplu olarak verebiliriz:sayfaNo,her sayfada kayit sayisi, siralama bilgisi(hangi ozellik ,hangi yonde)
     }
+
+
+    //14-grade ile ogrencileri filtreleme
+    public List<Student> getAllStudentByGrade(Integer grade) {
+
+        //select * from student where grade=100
+        //return repository.findAllByGrade(grade);
+
+        //Eger JPA repositorye bagimli kalmadan kendimiz metod ureticek olsaydik
+        return repository.filterStudentsByGrade(grade);
+
+    }
 }
