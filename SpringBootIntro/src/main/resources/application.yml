@@ -28,6 +28,22 @@ logging:   #logging.file.name:log/studentapp.log
     '[org.springframework.web]': WARN
     '[org.hibernate]': INFO
     '[com.tpe]': INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ['info','health','threaddump','env','beans','loggers']
+  info:
+    env:
+      enabled: true
+
+info:
+  application:
+    name: 'Student Management System Demo App '
+    version: '@project.version@'
+    description: 'Demo App For Spring Boot'
+
 #info ve uzeri
 #yorum satiri
 # aktif etme

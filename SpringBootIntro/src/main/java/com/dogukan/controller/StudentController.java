@@ -189,6 +189,9 @@ public class StudentController {
         //StudentDTO studentDTO = service.getStudentInfoById(id);
         StudentDTO studentDTO = service.getStudentInfoByDTO(id);
 
+
+        logger.warn("-----servisten gelen DTO objesi----------"+studentDTO.getName());
+
         return ResponseEntity.ok(studentDTO); //200
     }
 
