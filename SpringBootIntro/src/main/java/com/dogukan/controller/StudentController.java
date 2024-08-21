@@ -162,7 +162,13 @@ public class StudentController {
     //15-lastname ile öğrencileri filtreleyelim
     //request:http://localhost:8080/students/lastname?lastname=Potter + GET
     //response : lastname e sahip olan öğrenci listesi + 200
+    @GetMapping("/lastname")
+    public ResponseEntity<List<Student>> getAllStudentByLastName(@RequestParam("lastname") String lastName) {
+        List<Student> studentList = service.getAllStudentByLastName(lastName);
+        return new ResponseEntity<>(studentList, HttpStatus.OK); //200
+    }
 
+    //or kullanilacak
     //Meraklisina odev: isim veya soyisme gore filtreleme
     //request:http://localhost:8080/students/search?word=harry + GET
     //isim veya soyisim olunca ikisinden birini girince çıktı vermesıni isityoruz
@@ -185,4 +191,12 @@ public class StudentController {
     //          JPQL ile custom sorgu yazarak
     //19-name içinde "al" hecesi geçen öğrencileri filtreleyelim: READ//ex:halil
     //http://localhost:8080/students/filter?word=al + GET
+    @GetMapping("/filter")
+    public ResponseEntity<List<Student>> getStudentInfo(@RequestParam String word){
+
+        List<Student> students=service.getStudentsSearching(word);
+
+        return ResponseEntity.ok(students);//200
+
+    }
 }

@@ -106,7 +106,10 @@ public class StudentService {
 
     }
 
-    //16-odev
+    //16-odev: lastName ile ogrencileri filtreleme
+    public List<Student> getAllStudentByLastName(String lastName) {
+        return repository.findAllByLastName(lastName);
+    }
 
     //18-a: DB den id si verilen entity getirip tasiyalim
     //18-ogrencinin bazi fieldlarini DTO olarak dondurmek
@@ -128,5 +131,9 @@ public class StudentService {
                 orElseThrow(() -> new ResourceNotFoundException("Student Info is Not Found By id: " + id));
 
         return studentDTO;
+    }
+
+    public List<Student> getStudentsSearching(String word) {
+        return repository.findByNameContains(word);
     }
 }

@@ -41,4 +41,9 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     //18-JPQL ile tablodan gelen entity objesi DTO nun constructori ile DTO objesine donusturulur.
     @Query("SELECT new com.dogukan.dto.StudentDTO(s) FROM Student s WHERE id=:pId")
     Optional<StudentDTO> findStudentDTOById(@Param("pId") Long id);
+
+    List<Student> findAllByLastName(String lastName);
+
+    //20-a
+    List<Student> findByNameContains(String word); //spring implemente eder
 }
