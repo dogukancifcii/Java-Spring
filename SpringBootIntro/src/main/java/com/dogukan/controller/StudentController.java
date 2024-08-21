@@ -5,6 +5,8 @@ import com.dogukan.dto.StudentDTO;
 import com.dogukan.dto.UpdateStudentDTO;
 import com.dogukan.service.StudentService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -24,6 +27,8 @@ import java.util.List;
 @RequiredArgsConstructor
 //assagidaki final keywordlu StudentService icin parametreli constructor olusturup const enjection yapmasini sagladi.Boyle yapinca @Autowired yazmamiza gerek kalmadi.
 public class StudentController {
+
+    Logger logger = LoggerFactory.getLogger(StudentController.class);
 
     /*
     clienttan 3 şekilde data alabiliriz
@@ -192,11 +197,21 @@ public class StudentController {
     //19-name içinde "al" hecesi geçen öğrencileri filtreleyelim: READ//ex:halil
     //http://localhost:8080/students/filter?word=al + GET
     @GetMapping("/filter")
-    public ResponseEntity<List<Student>> getStudentInfo(@RequestParam String word){
+    public ResponseEntity<List<Student>> getStudentInfo(@RequestParam String word) {
 
-        List<Student> students=service.getStudentsSearching(word);
+        List<Student> students = service.getStudentsSearching(word);
 
         return ResponseEntity.ok(students);//200
 
+    }
+
+    //21- //http://localhost:8080/students/welcome + GET
+    @GetMapping("/welcome")
+    public String welcome(HttpServletRequest request) {
+
+        logger.info("welcome isteginin pathi: " + request.getServletPath());
+        logger.info("welcome isteginin http metodu : " + request.getMethod());
+
+        return "Welcome";
     }
 }
