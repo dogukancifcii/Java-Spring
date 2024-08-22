@@ -8,6 +8,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter //tum fieldlar icin getter method
 @Setter //tum fieldlar icin setter method
@@ -22,7 +24,7 @@ import java.time.LocalDateTime;
 
  */
 @Entity
-public class Student {
+public class Student {//One
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,6 +52,9 @@ public class Student {
 
     @Setter(AccessLevel.NONE)
     private LocalDateTime createDate = LocalDateTime.now();
+
+    @OneToMany(mappedBy = "student")
+    private List<Book> bookList =new ArrayList<>(); //Many
 
     //getter-setter: boilerplate code
 }
