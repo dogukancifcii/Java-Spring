@@ -1,3 +1,4 @@
+/*
 package com.dogukan.domain;
 
 import lombok.AccessLevel;
@@ -23,3 +24,4 @@ public class Book {//Many
     @ManyToOne
     private Student student;
 }
+*/

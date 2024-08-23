@@ -53,8 +53,8 @@ public class Student {//One
     @Setter(AccessLevel.NONE)
     private LocalDateTime createDate = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "student")
-    private List<Book> bookList =new ArrayList<>(); //Many
+   // @OneToMany(mappedBy = "student")
+    //private List<Book> bookList =new ArrayList<>(); //Many
 
     //getter-setter: boilerplate code
 }
