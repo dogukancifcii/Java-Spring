@@ -62,7 +62,11 @@ public class JWTUtils {
 
 
     //3-JWT tokendan username i alma
-    public String getUsernameFromToken() {
-        return null;
+    public String getUsernameFromToken(String token) {
+        return Jwts.parser()
+                .setSigningKey(secretKey)
+                .parseClaimsJws(token) //dogrulanmis tokenin claimlerini getirir (header,payload,signature)
+                .getBody()
+                .getSubject(); //username
     }
 }
