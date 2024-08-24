@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     //Username password eslesmesini kontrol edecegiz
-    Optional<User> findByUsername(String username);
+    Optional<User> findByUserName(String username);
 
 
 }

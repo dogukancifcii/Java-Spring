@@ -24,13 +24,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http.csrf().disable().//RestAPI.session yok
                 authorizeHttpRequests().
-                antMatchers("index.html", "/register", "/login").permitAll().
+                antMatchers("index.html","/register","/login").permitAll().
                 anyRequest().
                 authenticated().and().
-                httpBasic(); //basic auth
+                httpBasic();//basic auth
     }
 
     @Bean
@@ -48,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder(10); //zorluk:4 - 34
     }
 
-    @Override //authenticationManager a bir tane authenticationProvider vermis olduk
+    @Override//authenticationmanager a bir tane authenticationprovider verdik
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
