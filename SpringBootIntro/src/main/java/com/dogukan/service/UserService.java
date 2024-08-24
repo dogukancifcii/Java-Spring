@@ -1,5 +1,6 @@
 package com.dogukan.service;
 
+import com.dogukan.dto.UserRequest;
 import com.dogukan.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,4 +10,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+
+    public void saveUser(UserRequest userRequest) {
+    }
 }
