@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +51,8 @@ public class StudentController {
     //http://localhost:8080/students + GET
     //response: Tum ogrencilerin listesini + 200 : OK (Http Status Kodu)
 
+    @PreAuthorize("hasRole('ADMIN')")//ROLE_ADMIN (hasRole bunu yazmis oldu).Role vermis olduk spring security icin lazim
+    //bu requesti sadece Admin yapabilsin demis oluyoruz
     @GetMapping
     // @ResponseBody--RestController içinde var, bu sebeple gerek kalmadı!!!
     public ResponseEntity<List<Student>> listAllStudents() { //responseEntity verme sebebimiz Http Status olarak 200 alabilmek icin.hem datalari hemde status kod icin ResponseEntity kullandik
@@ -190,7 +193,7 @@ public class StudentController {
         StudentDTO studentDTO = service.getStudentInfoByDTO(id);
 
 
-        logger.warn("-----servisten gelen DTO objesi----------"+studentDTO.getName());
+        logger.warn("-----servisten gelen DTO objesi----------" + studentDTO.getName());
 
         return ResponseEntity.ok(studentDTO); //200
     }

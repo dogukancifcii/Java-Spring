@@ -26,8 +26,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return new org.springframework.security.core.userdetails.
                 User(user.getUserName(), user.getPassword(), buildGrantedAuthorities(user.getRoles()));
+        //kendi userimizin bilgileri ile securitynin userini(userdetails) olusturduk
     }
 
+    //bizim userimizin rolleri var -->grantedauthoritylere cevirelim
+    //simplegrantedauthority --> security nin tanidigi rolleri
     private List<SimpleGrantedAuthority> buildGrantedAuthorities(Set<Role> roles) {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
