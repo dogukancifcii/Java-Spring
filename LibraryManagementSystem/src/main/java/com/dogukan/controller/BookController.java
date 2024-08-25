@@ -45,4 +45,14 @@ public class BookController {
         return ResponseEntity.ok(bookList); //yukaridaki ile ayni
 
     }
+
+    //3-Get a book by id : Book
+    //http://localhost:8080/books/2 + GET
+    @GetMapping("/{id}")
+    public ResponseEntity<Book> getBookById(@PathVariable("id") Long id) {
+
+        Book foundBook = bookService.getBookById(id);
+
+        return new ResponseEntity<>(foundBook, HttpStatus.OK);
+    }
 }
