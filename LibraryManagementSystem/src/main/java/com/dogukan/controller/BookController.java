@@ -46,7 +46,7 @@ public class BookController {
 
     }
 
-    //3-Get a book by id : Book
+    //3-Get a book by id,return : Book
     //http://localhost:8080/books/2 + GET
     @GetMapping("/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable("id") Long id) {
@@ -54,5 +54,13 @@ public class BookController {
         Book foundBook = bookService.getBookById(id);
 
         return new ResponseEntity<>(foundBook, HttpStatus.OK);
+    }
+
+    //4- delete a book by ID,return: String
+    //http://localhost:8080/books/1 + DELETE JSON(BODY)
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteBook(@PathVariable("id") Long id) {
+        bookService.deleteBookById(id);
+        return new ResponseEntity<>("Kitap basariyla silindi",HttpStatus.OK);
     }
 }

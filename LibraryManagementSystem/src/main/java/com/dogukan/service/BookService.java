@@ -34,4 +34,10 @@ public class BookService {
 
         return book;
     }
+
+    public void deleteBookById(Long id) {
+        // Book book = getBookById(id);
+        // bookRepository.delete(book);
+        bookRepository.deleteById(id);//yukaridakiyle ayni islemler
+    }
 }
