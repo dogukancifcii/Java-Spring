@@ -74,8 +74,8 @@ public class BookController {
 
     //6- Get a Book by Title with RequestParam , Return : Book
     @GetMapping("/search")
-    public ResponseEntity<Book> getBookByTitleWithQuery(@RequestParam("title") String title) {
-        Book book = bookService.getBookByTitle(title);
-        return ResponseEntity.ok(book);
+    public ResponseEntity<List<Book>> getBookByTitleWithQuery(@RequestParam("title") String title) {
+        List<Book> books = bookService.getBookByTitle(title);
+        return ResponseEntity.ok(books);
     }
 }

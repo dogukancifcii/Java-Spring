@@ -4,7 +4,13 @@ import com.dogukan.domain.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Repository //JpaRepository oldugu icin yazmak zorunda degiliz fakat optional olarak okunabilirlik icin yazilabilir
 public interface BookRepository extends JpaRepository<Book, Long> {
-    Book findByTitle(String title);
+
+
+
+    List<Book> findByTitleContaining(String title);
 }

@@ -41,9 +41,10 @@ public class BookService {
         bookRepository.deleteById(id);//yukaridakiyle ayni islemler
     }
 
-    public Book getBookByTitle(String title) {
+    public List<Book> getBookByTitle(String title) {
 
-        Book book = bookRepository.findByTitle(title);
+        List<Book> book;
+        book = bookRepository.findByTitleContaining(title);
         return book;
     }
 }
