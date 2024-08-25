@@ -1,5 +1,7 @@
 package com.dogukan.domain;
 
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -7,10 +9,15 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "t_book")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor //hibernate ile bilgi cekerken noargsconst ihtiyacimiz var
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
     private Long id;
 
     @Column(nullable = false) //database'de null olamaz
@@ -26,4 +33,20 @@ public class Book {
 
     @Column(nullable = false)
     private String publicationDate;
+
+    //getter-setter
+
+    //constructor
+
+    //toString
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", publicationDate='" + publicationDate + '\'' +
+                '}';
+    }
 }
