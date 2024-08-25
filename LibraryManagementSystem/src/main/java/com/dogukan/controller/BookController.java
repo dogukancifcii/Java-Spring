@@ -6,12 +6,10 @@ import com.dogukan.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController//@Controller ve @ResponseBody birlesimidi
 // Amaç: RESTful web servisleri oluşturmak için kullanılır. Her bir HTTP isteğine verilen yanıt, varsayılan olarak JSON veya XML gibi bir veri formatında doğrudan istemciye gönderilir.
@@ -34,9 +32,17 @@ public class BookController {
 
 
         return new ResponseEntity<>("Kitap basariyla kaydedildi.", HttpStatus.CREATED); //201 202
-
     }
 
     //READ
+    //2- Get All Books,return : List<Book>
     //http://localhost:8080/books + GET
+    @GetMapping
+    public ResponseEntity<List<Book>> getAllBooks() {
+        List<Book> bookList = bookService.getAll();
+
+        //return new ResponseEntity<>(bookList, HttpStatus.OK);
+        return ResponseEntity.ok(bookList); //yukaridaki ile ayni
+
+    }
 }
