@@ -2,6 +2,7 @@ package com.dogukan.service;
 
 
 import com.dogukan.domain.Book;
+import com.dogukan.dto.BookDTO;
 import com.dogukan.exceptions.BookNotFoundException;
 import com.dogukan.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,14 @@ public class BookService {
         List<Book> book;
         book = bookRepository.findByTitleContaining(title);
         return book;
+    }
+
+    public void updateBookById(Long id, BookDTO bookDTO) {
+        Book existingBook = getBookById(id);
+
+        existingBook.setTitle(bookDTO.getTitle());
+        existingBook.setAuthor(bookDTO.getAuthor());
+        existingBook.setPublicationDate(bookDTO.getPublicationDate());
+        bookRepository.save(existingBook);
     }
 }

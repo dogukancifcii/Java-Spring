@@ -2,6 +2,7 @@ package com.dogukan.controller;
 
 
 import com.dogukan.domain.Book;
+import com.dogukan.dto.BookDTO;
 import com.dogukan.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -77,5 +78,15 @@ public class BookController {
     public ResponseEntity<List<Book>> getBookByTitleWithQuery(@RequestParam("title") String title) {
         List<Book> books = bookService.getBookByTitle(title);
         return ResponseEntity.ok(books);
+    }
+
+    //7-Update a Book Using DTO
+    //http://localhost:8080/books/update/2 + PUT ve PATCH
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateBook(@PathVariable("id") Long id, @Valid @RequestBody BookDTO bookDTO) {
+
+        bookService.updateBookById(id, bookDTO);
+
+        return ResponseEntity.ok("Kitap basariyla guncellendi ID : " + id);
     }
 }
