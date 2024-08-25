@@ -61,6 +61,14 @@ public class BookController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteBook(@PathVariable("id") Long id) {
         bookService.deleteBookById(id);
-        return new ResponseEntity<>("Kitap basariyla silindi",HttpStatus.OK);
+        return new ResponseEntity<>("Kitap basariyla silindi", HttpStatus.OK);
+    }
+
+    //5- Get a Book by ID with RequestParam , Return : Book
+    //http://localhost:8080/books/q?id=2 + GET
+    @GetMapping("/q")
+    public ResponseEntity<Book> getBookByIdWithQuery(@RequestParam("id") Long id) {
+        Book book = bookService.getBookById(id);
+        return ResponseEntity.ok(book);
     }
 }
