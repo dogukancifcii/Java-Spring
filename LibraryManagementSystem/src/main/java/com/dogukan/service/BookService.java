@@ -40,4 +40,10 @@ public class BookService {
         // bookRepository.delete(book);
         bookRepository.deleteById(id);//yukaridakiyle ayni islemler
     }
+
+    public Book getBookByTitle(String title) {
+
+        Book book = bookRepository.findByTitle(title);
+        return book;
+    }
 }

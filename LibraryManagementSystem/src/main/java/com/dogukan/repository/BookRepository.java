@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository //JpaRepository oldugu icin yazmak zorunda degiliz fakat optional olarak okunabilirlik icin yazilabilir
 public interface BookRepository extends JpaRepository<Book, Long> {
+    Book findByTitle(String title);
 }

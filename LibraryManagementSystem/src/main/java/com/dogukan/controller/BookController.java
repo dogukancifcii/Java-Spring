@@ -71,4 +71,11 @@ public class BookController {
         Book book = bookService.getBookById(id);
         return ResponseEntity.ok(book);
     }
+
+    //6- Get a Book by Title with RequestParam , Return : Book
+    @GetMapping("/search")
+    public ResponseEntity<Book> getBookByTitleWithQuery(@RequestParam("title") String title) {
+        Book book = bookService.getBookByTitle(title);
+        return ResponseEntity.ok(book);
+    }
 }
