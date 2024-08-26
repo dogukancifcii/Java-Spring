@@ -5,6 +5,10 @@ import com.dogukan.domain.Book;
 import com.dogukan.dto.BookDTO;
 import com.dogukan.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -88,5 +92,17 @@ public class BookController {
         bookService.updateBookById(id, bookDTO);
 
         return ResponseEntity.ok("Kitap basariyla guncellendi ID : " + id);
+    }
+
+    //8- Get Book with page
+    //http://localhost:8080/books/part?page=1&size=2&sort=publicationDate&direction=ASC  + GET
+    @GetMapping("/part")
+    public ResponseEntity<Page<Book>> getAllBooksWithPage(@RequestParam("page") int page, @RequestParam("size") int size, @RequestParam("sort") String sort, @RequestParam("direction") Sort.Direction direction) {
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sort));
+
+        Page<Book> bookWithPage = bookService.getAllBookWithPage(pageable);
+
+        return ResponseEntity.ok(bookWithPage);
     }
 }
