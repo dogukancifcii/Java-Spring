@@ -105,4 +105,14 @@ public class BookController {
 
         return ResponseEntity.ok(bookWithPage);
     }
+
+    //9- Get a Book By It's author using JPQL
+    //http://localhost:8080/books/jpql?author=alican
+    @GetMapping("/jpql")
+    public ResponseEntity<List<Book>> getBookByAuthorWithQuery(@RequestParam("author") String author) {
+
+        List<Book> bookList = bookService.getBookJpqlByAuthor(author);
+
+        return ResponseEntity.ok(bookList);
+    }
 }
