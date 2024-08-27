@@ -1,6 +1,7 @@
-/*
 package com.dogukan.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,9 +20,12 @@ public class Book {//Many
     @Setter(AccessLevel.NONE)
     private Long id;
 
+    @JsonProperty("bookName")
+    //sadece JSON formatinda fieldin belirtilen key ile gosterilmesini saglar
     private String name;
 
     @ManyToOne
+    @JsonIgnore
+    //bu fieldi JSON formatinda ignore at(gormezden gel)
     private Student student;
 }
-*/

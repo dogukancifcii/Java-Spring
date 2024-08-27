@@ -56,8 +56,8 @@ public class Student {//One
     @OneToOne
     private User user;
 
-   // @OneToMany(mappedBy = "student")
-    //private List<Book> bookList =new ArrayList<>(); //Many
+    @OneToMany(mappedBy = "student")
+    private List<Book> bookList = new ArrayList<>(); //Many
 
     //getter-setter: boilerplate code
 }
