@@ -24,4 +24,13 @@ public class CustomerController {
         return ResponseEntity.ok(customer);
     }
 
+    //http://localhost:8080/customers/1 + DELETE
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCustomer(@PathVariable Long id){
+
+        customerService.deleteCustomer(id);
+
+        return ResponseEntity.ok("Customer is deleted.");
+    }
+
 }
