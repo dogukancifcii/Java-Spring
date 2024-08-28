@@ -34,6 +34,9 @@ public class Book {
     @Column(nullable = false)
     private String publicationDate;
 
+    @ManyToOne
+    private Owner owner;
+
     //getter-setter
 
     //constructor
