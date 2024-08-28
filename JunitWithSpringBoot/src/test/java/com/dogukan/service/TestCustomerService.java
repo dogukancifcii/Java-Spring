@@ -12,8 +12,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TestCustomerService {
@@ -28,17 +27,17 @@ public class TestCustomerService {
 
 
     @Test
-    void testGetCustomerById(){
+    void testGetCustomerById() {
 
-        Customer customer=new Customer(1L,"Jack","Sparrow","JS");
+        Customer customer = new Customer(1L, "Jack", "Sparrow", "JS");
 
         when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
         when(customerRepository.findById(99L)).thenReturn(Optional.empty());
 
-        Customer actualCustomer=customerService.getCustomerById(1L);
+        Customer actualCustomer = customerService.getCustomerById(1L);
 
-        assertEquals(1L,actualCustomer.getId());
-        assertThrows(RuntimeException.class,()->customerService.getCustomerById(99L));
+        assertEquals(1L, actualCustomer.getId());
+        assertThrows(RuntimeException.class, () -> customerService.getCustomerById(99L));
         verify(customerRepository).findById(1L);
         verify(customerRepository).findById(99L);
 
@@ -46,7 +45,15 @@ public class TestCustomerService {
 
 
     @Test
-    void testDeleteCustomer() {
+    void testDeleteCustomer(){
+
+        Customer customer=new Customer(1L,"Jack","Sparrow","JS");
+
+        when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
+
+        customerService.deleteCustomer(1L);
+
+        verify(customerRepository,times(1)).deleteById(1L);
 
     }
 }
