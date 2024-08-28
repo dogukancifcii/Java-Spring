@@ -74,4 +74,10 @@ public class BookService {
 
         return bookList;
     }
+
+    public void addBookToOwner(Long bookId, Long ownerId) {
+        Book foundBook = getBookById(bookId);
+
+    }
+    
 }

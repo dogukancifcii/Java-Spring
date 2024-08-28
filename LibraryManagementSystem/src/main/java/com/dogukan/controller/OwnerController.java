@@ -26,7 +26,7 @@ public class OwnerController {
 
 
         ownerService.saveOwner(ownerDTO);
-        return new ResponseEntity<>("Ute basarili bir sekilde olusturuldu", HttpStatus.CREATED);
+        return new ResponseEntity<>("Uye basarili bir sekilde olusturuldu", HttpStatus.CREATED);
     }
 
     //find all owner
@@ -38,5 +38,5 @@ public class OwnerController {
     }
 
     //find an owner by id--odev
-
+    //delete-update
 }

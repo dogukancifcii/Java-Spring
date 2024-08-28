@@ -5,6 +5,7 @@ import com.dogukan.domain.Owner;
 import com.dogukan.dto.OwnerDTO;
 
 import com.dogukan.exceptions.ConflictException;
+import com.dogukan.exceptions.OwnerNotFoundException;
 import com.dogukan.repository.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,5 +41,9 @@ public class OwnerService {
 
     public List<Owner> getAll() {
         return ownerRepository.findAll();
+    }
+
+    public Owner getOwnerById(Long id) {
+        return ownerRepository.findById(id).orElseThrow(() -> new OwnerNotFoundException("Uye bulunamadi id: " + id));
     }
 }

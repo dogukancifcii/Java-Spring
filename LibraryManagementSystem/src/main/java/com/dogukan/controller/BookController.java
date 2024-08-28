@@ -115,4 +115,14 @@ public class BookController {
 
         return ResponseEntity.ok(bookList);
     }
+
+    //10- Add a Book To an owner
+    //http://localhost:8080/books/add?book=3&owner=1
+    //return : mesaj
+    @PatchMapping("/add")
+    public ResponseEntity<String> addBookToOwner(@RequestParam("book") Long bookId, @RequestParam("owner") Long ownerId) {
+
+        bookService.addBookToOwner(bookId, ownerId);
+        return ResponseEntity.ok("Kitap uyeye eklendi!!!");
+    }
 }

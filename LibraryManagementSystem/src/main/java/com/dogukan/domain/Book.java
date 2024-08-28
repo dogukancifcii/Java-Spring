@@ -1,5 +1,6 @@
 package com.dogukan.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -35,6 +36,7 @@ public class Book {
     private String publicationDate;
 
     @ManyToOne
+    @JsonIgnore
     private Owner owner;
 
     //getter-setter
