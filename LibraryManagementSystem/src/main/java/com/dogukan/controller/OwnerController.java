@@ -1,6 +1,8 @@
 package com.dogukan.controller;
 
 import com.dogukan.domain.Owner;
+import com.dogukan.dto.OwnerDTO;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,10 +18,11 @@ public class OwnerController {
     //http://localhost:8080/owners/save + JSON + POST
     //return : message
     @PostMapping("/save")
-    public ResponseEntity<String> saveOwner(@RequestBody Owner owner) {
+    public ResponseEntity<String> saveOwner(@RequestBody OwnerDTO ownerDTO) {
 
 
-        //ownerService.saveOwner(owner);
+        //ownerService.saveOwner(ownerDTO);
+        return new ResponseEntity<>("Ute basarili bir sekilde olusturuldu", HttpStatus.CREATED);
     }
 
 }

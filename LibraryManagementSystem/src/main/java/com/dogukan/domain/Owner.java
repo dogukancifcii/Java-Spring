@@ -1,12 +1,14 @@
 package com.dogukan.domain;
 
 
+import com.dogukan.dto.OwnerDTO;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -41,6 +43,12 @@ public class Owner {
     private LocalDateTime registrationDate = LocalDateTime.now();
 
     @OneToMany(mappedBy = "owner")
-    private List<Book> books;
+    private List<Book> books = new ArrayList<>();
 
+    public Owner(OwnerDTO ownerDTO) {
+        this.name = ownerDTO.getName();
+        this.lastName = ownerDTO.getLastName();
+        this.phone = ownerDTO.getPhone();
+        this.email = ownerDTO.getEmail();
+    }
 }
