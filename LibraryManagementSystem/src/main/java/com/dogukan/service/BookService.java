@@ -2,8 +2,10 @@ package com.dogukan.service;
 
 
 import com.dogukan.domain.Book;
+import com.dogukan.domain.Owner;
 import com.dogukan.dto.BookDTO;
 import com.dogukan.exceptions.BookNotFoundException;
+import com.dogukan.exceptions.isBookAlreadyExist;
 import com.dogukan.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +21,7 @@ public class BookService {
 
     @Autowired
     private BookRepository bookRepository;
+    private OwnerService ownerService;
 
     //1
     public void saveBook(Book book) {
@@ -77,7 +80,18 @@ public class BookService {
 
     public void addBookToOwner(Long bookId, Long ownerId) {
         Book foundBook = getBookById(bookId);
+        Owner foundOwner = ownerService.getOwnerById(ownerId);
 
+        //belirtilen kitap daha once bir owner'a verilmis mi?
+        boolean isBookExists = foundOwner.getBooks().contains(foundBook);
+        if (isBookExists) {
+            throw new isBookAlreadyExist("Bu kitaba zaten sahipsin!!!");
+        } else if (foundBook.getOwner() != (null)) {
+            throw new isBookAlreadyExist("Bu kitap baska birine ait");
+        } else {
+            foundBook.setOwner(foundOwner);
+        }
+        bookRepository.save(foundBook); //burda save methodu olan book update etmis oldu.
     }
-    
+
 }
