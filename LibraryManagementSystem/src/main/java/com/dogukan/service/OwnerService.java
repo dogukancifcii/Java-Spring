@@ -26,15 +26,15 @@ public class OwnerService {
         if (existsByEmail) {
             throw new ConflictException("This Email is Exist : " + ownerDTO.getEmail());
         }
-        //Owner newOwner = new Owner();
-
-        /*newOwner.setName(ownerDTO.getName());
+        Owner newOwner =new Owner();
+        newOwner.setName(ownerDTO.getName());
         newOwner.setLastName(ownerDTO.getLastName());
         newOwner.setPhone(ownerDTO.getPhone());
-        newOwner.setEmail(ownerDTO.getEmail());*/
+        newOwner.setEmail(ownerDTO.getEmail());
 
         //yukaridaki uzun uzun yazmak yerine assagidaki gibi owner icine const metodu kullanabiliriz.
-        Owner newOwner = new Owner(ownerDTO);
+        //Owner newOwner = new Owner(ownerDTO);
+
         ownerRepository.save(newOwner);
 
     }

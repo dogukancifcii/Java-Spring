@@ -21,6 +21,8 @@ public class BookService {
 
     @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
     private OwnerService ownerService;
 
     //1
